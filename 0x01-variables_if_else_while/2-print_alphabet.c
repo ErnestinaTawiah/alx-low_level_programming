@@ -1,3 +1,8 @@
+/*
+ * File: 2-print_alphabet.c
+ * Auth: Ernestina L Tawiah
+ */
+
 #include <stdio.h>
 
 /**
