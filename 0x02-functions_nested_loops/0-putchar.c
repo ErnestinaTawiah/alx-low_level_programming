@@ -14,7 +14,7 @@ char str[] = "_putchar";
 int i;
 
 i = 0;
-while (str[i]);
+while (str[i])
 {
 _putchar(str[i]);
 ++i;
