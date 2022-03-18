@@ -2,6 +2,8 @@
 
 /**
  * more_numbers - Prints the numbers 0-14 ten times.
+ *
+ * Return: Always 0.
  */
 void more_numbers(void)
 {
@@ -15,6 +17,7 @@ if (num > 9)
 _putchar((num / 10) + '0');
 _putchar((num % 10) + '0');
 }
+
 _putchar('\n');
 }
 }
