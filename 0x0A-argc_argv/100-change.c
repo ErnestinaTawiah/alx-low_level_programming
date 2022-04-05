@@ -1,43 +1,40 @@
-#include<stdio.h>
- 
-int count( int S[], int m, int n )
-{
-int i, j, x, y;
- 
-// We need n+1 rows as the table is constructed
-// in bottom up manner using the base case 0
-// value case (n = 0)
-int table[n+1][m];
-    
-// Fill the entries for 0 value case (n = 0)
-for (i=0; i<m; i++)
-table[0][i] = 1;
- 
-// Fill rest of the table entries in bottom
-// up manner 
-for (i = 1; i < n+1; i++)
-{
-for (j = 0; j < m; j++)
-{
-// Count of solutions including S[j]
-x = (i-S[j] >= 0)? table[i - S[j]][j]: 0;
- 
-// Count of solutions excluding S[j]
-y = (j >= 1)? table[i][j-1]: 0;
+#include <stdio.h>
+#include <stdlib.h>
 
-// total count
-table[i][j] = x + y;
-}
-}
-return table[n][m-1];
-}
- 
-// Driver program to test above function
-int main()
+/**
+ * main - prints minimum number of coins to make change for an amount of money.
+ * @argc: number of arguments passed to the function
+ * @argv: argument vector of pointers to strings
+ *
+ * Return: 0 if no errors, else 1
+ */
+int main(int argc, char *argv[])
 {
-int arr[] = {1, 2, 3};
-int m = sizeof(arr)/sizeof(arr[0]);
-int n = 4;
-printf(" %d ", count(arr, m, n));
-return 0;
+int a, n = 0, i, t;
+int c[5] = {25, 10, 5, 2, 1};
+
+if (argc != 2)
+{
+puts("Error");
+return (1);
+}
+a = atoi(argv[1]);
+if (a <= 0)
+{
+puts("0");
+return (1);
+}
+else
+{
+for (i = 0; i < 5; i++)
+{
+t = a / c[i];
+a -= t * c[i];
+n += t;
+if (a == 0)
+break;
+}
+}
+printf("%d\n", n);
+return (0);
 }
