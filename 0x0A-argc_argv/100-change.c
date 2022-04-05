@@ -1,58 +1,43 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
+#include<stdio.h>
+ 
+int count( int S[], int m, int n )
+{
+int i, j, x, y;
+ 
+// We need n+1 rows as the table is constructed
+// in bottom up manner using the base case 0
+// value case (n = 0)
+int table[n+1][m];
+    
+// Fill the entries for 0 value case (n = 0)
+for (i=0; i<m; i++)
+table[0][i] = 1;
+ 
+// Fill rest of the table entries in bottom
+// up manner 
+for (i = 1; i < n+1; i++)
+{
+for (j = 0; j < m; j++)
+{
+// Count of solutions including S[j]
+x = (i-S[j] >= 0)? table[i - S[j]][j]: 0;
+ 
+// Count of solutions excluding S[j]
+y = (j >= 1)? table[i][j-1]: 0;
 
-
-/**
- * _isnumber - checks if string is a number
- * @s: string
- *
- * Return: On success 1.
- * If not a number, 0 is returned.
- */
-int _isnumber(char *s)
-{
-int i, check, d;
-
-i = 0, d = 0, check = 1;
-if (*s == '-')
-i++;
-for (; *(s + i) != 0; i++)
-{
-d = isdigit(*(s + i));
-if (d == 0)
-{
-check = 0;
-break;
+// total count
+table[i][j] = x + y;
 }
 }
-return (check);
+return table[n][m-1];
 }
-/**
- * main - Entry point
- *
- * @argc: Counts the number of parameters that go into main
- * @argv: Pointer of array of pointers containing strings entering main
- * Return: Always 0 (Success)
- */
-int main(int argc, char **argv)
+ 
+// Driver program to test above function
+int main()
 {
-int i, n, ex;
-
-ex = 0, n = 0;
-if (argc > 1)
-{
-for (i = 1; i < argc; i++)
-{
-if (_isnumber(argv[i]))
-n += atoi(argv[i]);
-else
-ex = 1;
-}
-}
-if (ex == 0)
-printf("%i\n", n);
-else
-printf("%s\n", "Error");
-return (ex);
+int arr[] = {1, 2, 3};
+int m = sizeof(arr)/sizeof(arr[0]);
+int n = 4;
+printf(" %d ", count(arr, m, n));
+return 0;
 }
